@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="5dp"
+        android:layout_margin="10dp"
+        android:backgroundTint="#B851F0"
+        app:cardCornerRadius="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/nameHeader"
+            android:text="Osman Header"
+            android:gravity="center"
+            android:textSize="36dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+
+            />
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
