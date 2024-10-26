@@ -7,8 +7,9 @@ import com.example.singleadaptermultipleviewholder.Database.VIEW_TYPE_HEADER
 import com.example.singleadaptermultipleviewholder.Database.VIEW_TYPE_ITEM
 import com.example.singleadaptermultipleviewholder.databinding.HeaderCardViewBinding
 import com.example.singleadaptermultipleviewholder.databinding.ItemCardViewBinding
+import com.shuhart.stickyheader.StickyAdapter
 
-class MyAdapter(private val totalList: List<DataItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MyAdapter(private val totalList: List<DataItem>) : StickyAdapter<RecyclerView.ViewHolder,RecyclerView.ViewHolder>() {
 
     inner class ItemViewHolder(val binding: ItemCardViewBinding) : RecyclerView.ViewHolder(binding.root)
     inner class HeaderViewHolder(val binding: HeaderCardViewBinding) : RecyclerView.ViewHolder(binding.root)
@@ -25,6 +26,8 @@ class MyAdapter(private val totalList: List<DataItem>) : RecyclerView.Adapter<Re
     override fun getItemCount(): Int {
         return totalList.size
     }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -55,6 +58,28 @@ class MyAdapter(private val totalList: List<DataItem>) : RecyclerView.Adapter<Re
 
         }
     }
+
+    // Sticker Adapter Implementation
+    override fun getHeaderPositionForItem(itemPosition: Int): Int {
+        for (i in itemPosition downTo 0) {
+            if (getItemViewType(i) == VIEW_TYPE_HEADER){
+                return i
+            }
+        }
+        return RecyclerView.NO_POSITION
+    }
+
+
+    override fun onCreateHeaderViewHolder(parent: ViewGroup?): RecyclerView.ViewHolder {
+        return HeaderViewHolder(HeaderCardViewBinding.inflate(LayoutInflater.from(parent?.context), parent, false))
+    }
+
+    override fun onBindHeaderViewHolder(holder: RecyclerView.ViewHolder?, headerPosition: Int) {
+         val header = totalList[headerPosition] as DataItem.Header
+        (holder  as HeaderViewHolder).binding.nameHeader.text = header.name
+
+    }
+
 
 
 }
